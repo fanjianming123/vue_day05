@@ -1,28 +1,48 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <section class="todoapp">
+    <!-- 除了驼峰, 还可以使用-转换链接 -->
+    <TodoHeader @add="addFn"></TodoHeader>
+    <TodoMain :list="list"></TodoMain>
+    <TodoFooter></TodoFooter>
+  </section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// 1.0 样式引入
+import './assets/styles/base.css'
+import './assets/styles/index.css'
+
+import TodoHeader from './components/TodoHeader'
+import TodoMain from './components/TodoMain'
+import TodoFooter from './components/TodoFooter'
 
 export default {
-  name: 'App',
+  data() {
+    return {
+      list: [
+        { id: 100, name: '吃饭', isDone: true },
+        { id: 101, name: '睡觉', isDone: false },
+        { id: 102, name: '打豆豆', isDone: true },
+      ],
+    }
+  },
   components: {
-    HelloWorld
-  }
+    TodoHeader,
+    TodoMain,
+    TodoFooter,
+  },
+  methods: {
+    addFn(val) {
+      // console.log(val);
+      const id = this.list[this.list.length - 1]
+        ? this.list[this.list.length - 1].id + 1
+        : 100 
+        this.list.push({
+          id,
+          name:val,
+          isDone:false,
+        })
+    },
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
