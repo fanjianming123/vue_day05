@@ -2,7 +2,7 @@
   <section class="todoapp">
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader @add="addFn"></TodoHeader>
-    <TodoMain :list="list"></TodoMain>
+    <TodoMain :list="list" @del="delFn"></TodoMain>
     <TodoFooter></TodoFooter>
   </section>
 </template>
@@ -32,16 +32,21 @@ export default {
     TodoFooter,
   },
   methods: {
+    //增加
     addFn(val) {
       // console.log(val);
       const id = this.list[this.list.length - 1]
         ? this.list[this.list.length - 1].id + 1
-        : 100 
-        this.list.push({
-          id,
-          name:val,
-          isDone:false,
-        })
+        : 100
+      this.list.push({
+        id,
+        name: val,
+        isDone: false,
+      })
+    },
+    //删除
+    delFn(id) {
+      this.list=this.list.filter((ele) => ele.id !== id)
     },
   },
 }
