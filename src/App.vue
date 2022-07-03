@@ -3,7 +3,7 @@
     <!-- 除了驼峰, 还可以使用-转换链接 -->
     <TodoHeader @add="addFn"></TodoHeader>
     <TodoMain :list="list" @del="delFn"></TodoMain>
-    <TodoFooter></TodoFooter>
+    <TodoFooter :count="count"></TodoFooter>
   </section>
 </template>
 
@@ -49,5 +49,10 @@ export default {
       this.list=this.list.filter((ele) => ele.id !== id)
     },
   },
+  computed:{
+    count(){
+      return this.list.filter((ele) => !ele.isDone).length
+    }
+  }
 }
 </script>

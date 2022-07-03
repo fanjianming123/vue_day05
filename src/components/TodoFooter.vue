@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <span class="todo-count">剩余<strong>数量值</strong></span>
+    <span class="todo-count">剩余<strong>{{count}}</strong></span>
     <ul class="filters">
       <li>
         <a class="selected" href="javascript:;" >全部</a>
@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  props:["count"]
 
 }
 </script>
